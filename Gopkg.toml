@@ -102,3 +102,7 @@ required = [
 [[constraint]]
   name = "gopkg.in/robfig/cron.v2"
   branch = "v2"
+
+[[constraint]]
+  name = "github.com/prometheus/prometheus"
+  version = "=2.3.2"
