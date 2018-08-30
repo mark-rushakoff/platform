@@ -263,7 +263,7 @@ func TestResponse_ResultIterator(t *testing.T) {
 			encoderConfig := csv.DefaultEncoderConfig()
 			encoder := csv.NewMultiResultEncoder(encoderConfig)
 			var got bytes.Buffer
-			n, err := encoder.Encode(&got, tt.response)
+			n, err := encoder.Encode(&got, influxql.NewResponseIterator(tt.response))
 			if err != nil && tt.err != nil {
 				if err.Error() != tt.err.Error() {
 					t.Errorf("unexpected error want: %s\n got: %s\n", tt.err.Error(), err.Error())
