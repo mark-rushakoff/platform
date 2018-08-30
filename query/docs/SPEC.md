@@ -412,6 +412,12 @@ An _object type_ represents a set of unordered key and value pairs.
 The key must always be a string.
 The value may be any other type, and need not be the same as other values within the object.
 
+#### Map types
+
+A _map type_ represents a set of unordered key and value pairs.
+Just like an _object type_ the key must always be a string, but the value may be any other type.
+A variable of type _map_ is immutable and cannot be accessed after it is declared.
+
 #### Function types
 
 A _function type_ represents a set of all functions with the same argument and result types.
@@ -538,6 +544,14 @@ A function may be given a name using a variable assignment.
 Function literals are _closures_: they may refer to variables defined is a surrounding block.
 Those variables are shared between the function literal and the surrounding block.
 
+#### Map literals
+
+A map literal is a value of type _map_.
+
+    MapLiteral = "{" "[" StringExpression "]" ":" Expression "}" .
+
+A StringExpression is any Expression that evaluates to type _string_.
+
 #### Call expressions
 
 A call expressions invokes a function with the provided arguments.
@@ -567,6 +581,26 @@ Examples:
     bar = (x=<-) => // function body elided
     baz = (y=<-) => // function body elided
     foo() |> bar() |> baz() // equivalent to baz(x:bar(y:foo()))
+
+#### Member Expressions
+
+A member expression specifies access to an element of an array or object.
+
+    MemberExpression    = PropertyExpression | KeyExpression .
+    PropertyExpression  = identifier "." identifier .
+    KeyExpression       = identifier "[" ( StringLiteral | IntegerLiteral ) "]" .
+
+Object Example:
+
+    obj = {a: 1, b: "str"}  // declare a variable of type object
+    a_value = obj.a         // a_value = 1
+    b_value = obj["b"]      // b_value = "str"
+
+Array Example:
+
+    arr = [3, 4, 5] // declare a variable of type array
+    foo = arr[0]    // foo = 3
+    bar = arr[2]    // bar = 5
 
 ### Statements
 
